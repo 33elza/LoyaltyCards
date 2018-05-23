@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.support.design.widget.BottomSheetBehavior
 import android.support.design.widget.BottomSheetDialog
 import android.support.v7.widget.GridLayoutManager
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.PresenterType
+import com.arellomobile.mvp.presenter.ProvidePresenterTag
 import com.example.el.loyaltycards.App
 import com.example.el.loyaltycards.R
 import com.example.el.loyaltycards.entity.Card
@@ -21,6 +24,7 @@ import kotlinx.android.synthetic.main.activity_cards.*
 import kotlinx.android.synthetic.main.bottom_sheet_card_dialog.view.*
 import ru.terrakok.cicerone.NavigatorHolder
 import javax.inject.Inject
+
 
 private const val GRID_SIZE_PORTRAIT = 2
 private const val GRID_SIZE_LANDSCAPE = 3
@@ -66,6 +70,9 @@ class CardsActivity : MvpAppCompatActivity(), CardsView {
         dialog
     }
 
+    @ProvidePresenterTag(presenterClass = CardsPresenter::class, type = PresenterType.GLOBAL)
+    fun provideCardsPresenterTag(): String = "CardsPresenter"
+
     // LifeCycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -98,6 +105,26 @@ class CardsActivity : MvpAppCompatActivity(), CardsView {
         super.onPause()
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.sort_cards_menu, menu)
+        menu?.findItem(presenter.getSelectedMenuItem())?.setChecked(true)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.sortByNameItem -> {
+                presenter.onSortByNameItemClicked()
+                item.setChecked(true)
+            }
+            R.id.sortByDateItem -> {
+                presenter.onSortByDateItemClicked()
+                item.setChecked(true)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun defineGridSize(): Int {
         if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT)
             return GRID_SIZE_PORTRAIT
@@ -121,4 +148,5 @@ class CardsActivity : MvpAppCompatActivity(), CardsView {
         val mod = selectedIndex % gridSize
         cardListAdapter.notifyItemRangeChanged(selectedIndex - mod, cardListAdapter.itemCount - selectedIndex + mod)
     }
+
 }

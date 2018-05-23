@@ -1,19 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:orientation="vertical"
+    android:padding="8dp"
     tools:context=".ui.fragment.BarcodeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <EditText
-        android:id="@+id/cardNameEditText"
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:hint="@string/card_name"
-        android:inputType="text" />
+        android:layout_height="match_parent">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp">
+
+                <EditText
+                    android:id="@+id/cardNameEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/card_name"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:paddingTop="4dp">
+
+                    <EditText
+                        android:id="@+id/cardCodeEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:hint="@string/card_code"
+                        android:inputType="number" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageButton
+                    android:id="@+id/readBarcodeButton"
+                    style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/readBarcode"
+                    android:src="@drawable/ic_camera_black_24dp"
+                    android:tint="@color/colorAccent" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/cardFrontPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:contentDescription="@string/frontPhotoCard"
+                        android:scaleType="centerCrop">
+
+                    </ImageView>
+
+                    <ImageButton
+                        android:id="@+id/addFrontPhotoIcon"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:background="@android:color/background_light"
+                        android:contentDescription="@string/frontPhotoCard"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_add_a_photo_black_24dp"
+                        android:tint="@color/colorAccent" />
+
+                    <TextView
+                        android:id="@+id/frontPhotoTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/frontPhotoCard" />
+
+
+                </FrameLayout>
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/cardBackPhoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_margin="4dp"
+                        android:background="@android:color/darker_gray"
+                        android:contentDescription="@string/backPhotoCard"
+                        android:orientation="vertical"
+                        android:scaleType="centerCrop" />
+
+                    <ImageButton
+                        android:id="@+id/addBackPhotoIcon"
+                        style="@style/Widget.AppCompat.ImageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end|bottom"
+                        android:background="@android:color/background_light"
+                        android:contentDescription="@string/backPhotoCard"
+                        android:foreground="?attr/selectableItemBackground"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_add_a_photo_black_24dp"
+                        android:tint="@color/colorAccent" />
+
+                    <TextView
+                        android:id="@+id/backPhotoTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="@string/backPhotoCard" />
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="4dp">
+
+                <EditText
+                    android:id="@+id/cardNoteEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/card_note"
+                    android:inputType="text" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <Button
+                android:id="@+id/saveCardButton"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="@string/saveCard" />
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</FrameLayout>

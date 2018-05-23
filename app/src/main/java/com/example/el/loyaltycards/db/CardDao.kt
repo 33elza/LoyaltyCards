@@ -7,15 +7,15 @@ import com.example.el.loyaltycards.entity.Card
 @Dao
 interface CardDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(card: Card)
 
     @Query("SELECT * FROM card")
     fun cards(): List<Card>
 
-    @Update
-    fun update(card: Card)
-
     @Delete
     fun delete(card: Card)
+
+    @Query("SELECT * FROM card ORDER BY name ASC")
+    fun cardsSortedByName(): List<Card>
 }

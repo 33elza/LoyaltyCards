@@ -1,7 +1,6 @@
 package com.example.el.loyaltycards.ui.adapter
 
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.support.v4.graphics.ColorUtils
 import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
@@ -29,7 +28,7 @@ class CardListAdapter(var cards: List<Card>, val listener: Listener) : RecyclerV
         val card = cards[position]
 
         holder.cardNameTextView.setText(card.name)
-        holder.cardView.background = ColorDrawable(card.color)
+        holder.cardView.setCardBackgroundColor(card.color)
         if (ColorUtils.calculateLuminance(card.color) < 0.5) {
             holder.cardNameTextView.setTextColor(Color.WHITE)
         } else {

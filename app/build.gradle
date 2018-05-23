@@ -39,6 +39,7 @@ dependencies {
     // Dagger
     implementation 'com.google.dagger:dagger:2.15'
     implementation 'com.android.support.constraint:constraint-layout:1.1.0'
+    implementation "com.android.support:support-v4:$support_version"
     implementation 'com.android.support:support-v4:27.1.1'
     kapt 'com.google.dagger:dagger-compiler:2.15'
 
@@ -46,23 +47,37 @@ dependencies {
     implementation 'ru.terrakok.cicerone:cicerone:3.0.0'
 
     // Room
-    implementation "android.arch.persistence.room:runtime:1.0.0"
-    kapt "android.arch.persistence.room:compiler:1.0.0"
+    implementation "android.arch.persistence.room:runtime:1.1.0"
+    kapt "android.arch.persistence.room:compiler:1.1.0"
 
     // Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.22.5'
 
     // Tests
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     // Moxy
-    compile 'com.arello-mobile:moxy:1.5.3'
-    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
+    implementation 'com.arello-mobile:moxy:1.5.3'
+    implementation 'com.arello-mobile:moxy-app-compat:1.5.3'
     kapt 'com.arello-mobile:moxy-compiler:1.5.3'
 
     // EventBus
     implementation 'org.greenrobot:eventbus:3.1.1'
+
+    // Palette
+    implementation "com.android.support:palette-v7:$support_version"
+
+    //Barcode
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+    implementation 'me.dm7.barcodescanner:zxing:1.9'
+
+    // Picasso
+    //implementation 'com.squareup.picasso:picasso:2.71828'
+
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    kapt 'com.github.bumptech.glide:compiler:4.7.1'
 
 }

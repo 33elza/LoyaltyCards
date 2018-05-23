@@ -8,4 +8,22 @@
     <string name="card_name">Название карты</string>
     <string name="edit_card">Редактировать</string>
     <string name="delete_card">Удалить</string>
+    <string name="card_code">Номер карты</string>
+    <string name="readBarcode">Сканировать</string>
+    <string name="frontPhotoCard">Передняя сторона карты</string>
+    <string name="card_note">Примечание</string>
+    <string name="saveCard">Сохранить</string>
+    <string name="backPhotoCard">Задняя сторона карты</string>
+    <string name="sortByName">Сортировать по имени</string>
+    <string name="sortByDate">Сортировать по дате добавления</string>
+    <string name="sortOrder">Сортировать</string>
+    <string name="empty_code_error">Введите или отсканируйте номер карты</string>
+    <string name="invalid_card_code">Номер карты должен содержать только цифры</string>
+    <string name="empty_card_name_error">Введите название карты</string>
+    <string name="empty_front_photo">Сделайте фото передней стороны карты</string>
+    <string name="barcode_image">Штрих-код</string>
+
+    <string name="title_activity_show_image_fullscreen">ShowImageFullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -6,8 +6,11 @@ import android.support.annotation.NonNull
 import com.example.el.loyaltycards.db.DataBase
 import com.example.el.loyaltycards.repository.CardsRepository
 import com.example.el.loyaltycards.repository.ICardsRepository
+import com.example.el.loyaltycards.utils.CardValidator
+import com.example.el.loyaltycards.utils.ICardValidator
 import dagger.Module
 import dagger.Provides
+import me.dm7.barcodescanner.zxing.ZXingScannerView
 import ru.terrakok.cicerone.Cicerone
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
@@ -37,5 +40,12 @@ class AppModule(private val context: Context) {
     @Singleton
     @NonNull
     fun cardsRepository(db: DataBase): ICardsRepository = CardsRepository(db)
+
+    @Provides
+    @NonNull
+    fun cardValidator(): ICardValidator = CardValidator()
+
+    @Provides
+    fun scannerView(): ZXingScannerView = ZXingScannerView(context)
 
 }

@@ -20,7 +20,38 @@
             <TextView
                 android:id="@+id/cardName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:shadowColor="@color/textShadowColor"
+                android:shadowDx="2"
+                android:shadowDy="2"
+                android:shadowRadius="3"
+                android:textAllCaps="true"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/barcodeImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_margin="16dp"
+                    android:contentDescription="@string/barcode_image" />
+
+                <TextView
+                    android:id="@+id/cardBarcodetextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+            </FrameLayout>
 
         </LinearLayout>
 

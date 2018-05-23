@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:icon="@drawable/ic_sort_white_24dp"
+        android:title="@string/sortOrder"
+        app:showAsAction="ifRoom">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/sortByDateItem"
+                    android:title="@string/sortByDate"
+                    app:showAsAction="never" />
+
+                <item
+                    android:id="@+id/sortByNameItem"
+                    android:title="@string/sortByName"
+                    app:showAsAction="never" />
+            </group>
+        </menu>
+    </item>
+</menu>

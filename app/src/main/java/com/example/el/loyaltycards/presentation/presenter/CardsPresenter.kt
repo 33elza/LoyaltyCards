@@ -1,9 +1,9 @@
 package com.example.el.loyaltycards.presentation.presenter
 
-import android.graphics.Color
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.example.el.loyaltycards.App
+import com.example.el.loyaltycards.R
 import com.example.el.loyaltycards.entity.Card
 import com.example.el.loyaltycards.presentation.view.CardsView
 import com.example.el.loyaltycards.repository.ICardsRepository
@@ -15,7 +15,6 @@ import org.greenrobot.eventbus.ThreadMode
 import ru.terrakok.cicerone.Router
 import java.util.*
 import javax.inject.Inject
-import kotlin.collections.ArrayList
 
 @InjectViewState
 class CardsPresenter : MvpPresenter<CardsView>() {
@@ -29,10 +28,9 @@ class CardsPresenter : MvpPresenter<CardsView>() {
     private var selectedCard: Card? = null
     private var selectedIndex: Int? = null
 
-    var cards = ArrayList<Card>()
+    private var selectedMenuItemId: Int = R.id.sortByDateItem
 
-    //TODO удалить
-    val random = Random()
+    var cards = ArrayList<Card>()
 
     init {
         App.component.inject(this)
@@ -42,8 +40,10 @@ class CardsPresenter : MvpPresenter<CardsView>() {
         if (!EventBus.getDefault().isRegistered(this)) {
             EventBus.getDefault().register(this)
         }
-
-        cardsRepository.getCards()
+        when (selectedMenuItemId) {
+            R.id.sortByDateItem -> cardsRepository.getCards()
+            R.id.sortByNameItem -> cardsRepository.getCardsSortedByName()
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
@@ -63,17 +63,22 @@ class CardsPresenter : MvpPresenter<CardsView>() {
         }
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onCardInserted(cards: ICardsRepository.CardInserted) {
+        when (selectedMenuItemId) {
+            R.id.sortByDateItem -> cardsRepository.getCards()
+            R.id.sortByNameItem -> cardsRepository.getCardsSortedByName()
+        }
+        viewState.setCards(this@CardsPresenter.cards)
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         EventBus.getDefault().unregister(this)
     }
 
     fun onAddFabListener() {
-        cardsRepository.insertCard(Card(name = System.currentTimeMillis().toString(),
-                color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256))))
-        cardsRepository.getCards()
-
-        //router.navigateTo(CARD_CONTAINER_MODULE, Module.DETAILS.apply { card = null })
+        router.navigateTo(CARD_CONTAINER_MODULE, Module.DETAILS.apply { card = null })
     }
 
     fun onEditCard() {
@@ -96,5 +101,19 @@ class CardsPresenter : MvpPresenter<CardsView>() {
                 router.navigateTo(CARD_CONTAINER_MODULE, Module.BARCODE.apply { this.card = card })
             }
         }
+    }
+
+    fun onSortByNameItemClicked() {
+        cardsRepository.getCardsSortedByName()
+        selectedMenuItemId = R.id.sortByNameItem
+    }
+
+    fun onSortByDateItemClicked() {
+        cardsRepository.getCards()
+        selectedMenuItemId = R.id.sortByDateItem
+    }
+
+    fun getSelectedMenuItem(): Int {
+        return selectedMenuItemId
     }
 }

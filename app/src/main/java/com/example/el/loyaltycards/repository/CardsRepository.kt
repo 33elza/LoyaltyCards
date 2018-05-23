@@ -10,6 +10,7 @@ class CardsRepository(private val db: DataBase) : ICardsRepository {
     override fun insertCard(card: Card) {
         async {
             db.cardsDao().insert(card)
+            EventBus.getDefault().post(ICardsRepository.CardInserted(card))
         }
     }
 
@@ -23,6 +24,12 @@ class CardsRepository(private val db: DataBase) : ICardsRepository {
     override fun getCards() {
         async {
             EventBus.getDefault().post(ICardsRepository.Cards(db.cardsDao().cards()))
+        }
+    }
+
+    override fun getCardsSortedByName() {
+        async {
+            EventBus.getDefault().post(ICardsRepository.Cards(db.cardsDao().cardsSortedByName()))
         }
     }
 }

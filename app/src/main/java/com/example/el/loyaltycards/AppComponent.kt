@@ -1,8 +1,10 @@
 package com.example.el.loyaltycards
 
 import com.example.el.loyaltycards.presentation.presenter.BarcodePresenter
+import com.example.el.loyaltycards.presentation.presenter.CardDetailsPresenter
 import com.example.el.loyaltycards.presentation.presenter.CardPresenter
 import com.example.el.loyaltycards.presentation.presenter.CardsPresenter
+import com.example.el.loyaltycards.ui.activity.BarcodeCaptureActivity
 import com.example.el.loyaltycards.ui.activity.CardActivity
 import com.example.el.loyaltycards.ui.activity.CardsActivity
 import com.example.el.loyaltycards.ui.fragment.BarcodeFragment
@@ -18,4 +20,6 @@ interface AppComponent {
     fun inject(cardActivity: CardActivity)
     fun inject(barcodeFragment: BarcodeFragment)
     fun inject(barcodePresenter: BarcodePresenter)
+    fun inject(cardDetailsPresenter: CardDetailsPresenter)
+    fun inject(barcodeCaptureActivity: BarcodeCaptureActivity)
 }
