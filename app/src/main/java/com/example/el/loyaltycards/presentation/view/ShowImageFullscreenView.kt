@@ -1,5 +1,6 @@
 package com.example.el.loyaltycards.presentation.view
 
+import android.net.Uri
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.SingleStateStrategy
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
@@ -9,6 +10,6 @@ interface ShowImageFullscreenView: MvpView {
     fun hideActionBar()
     fun setFullScreenImageViewVisibility()
     fun setFullScreenImageViewVisibilityInitial()
-    fun loadImage()
+    fun loadImage(imageUri: Uri)
 
 }

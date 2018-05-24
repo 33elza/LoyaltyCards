@@ -35,14 +35,10 @@ class BarcodePresenter : MvpPresenter<BarcodeView>() {
         if (card == null) {
             card = arguments?.get(CARD_KEY) as Card?
         }
-        App.component.inject(this)
-    }
+        viewState.setCard(card)
+        viewState.setBarcode(card!!.code, defineBarcodeFormat(card!!.code))
 
-    fun onResume() {
-        if (card != null) {
-            viewState.setCard(card)
-            viewState.setBarcode(card!!.code, defineBarcodeFormat(card!!.code))
-        }
+        App.component.inject(this)
     }
 
     override fun onDestroy() {
@@ -53,6 +49,9 @@ class BarcodePresenter : MvpPresenter<BarcodeView>() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onCardInserted(card: ICardsRepository.CardInserted) {
         this.card = card.card
+
+        viewState.setCard(card.card)
+        viewState.setBarcode(card.card.code, defineBarcodeFormat(card.card.code))
     }
 
     fun onMoreButtonListener() {

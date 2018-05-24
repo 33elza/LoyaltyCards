@@ -20,4 +20,6 @@ interface CardDetailsView : MvpView {
 
     @StateStrategyType(SkipStrategy::class)
     fun openBarcodeCaptureActivity()
+
+    fun checkPermissions()
 }

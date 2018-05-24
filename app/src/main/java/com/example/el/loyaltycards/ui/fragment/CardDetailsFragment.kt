@@ -44,6 +44,8 @@ class CardDetailsFragment : MvpAppCompatFragment(), CardDetailsView {
 
     val PERMISSION_REQUEST_CODE = 0
 
+    val BACKGROUD_IMAGE_OPACITY = 200
+
     private var imageUri: Uri? = null
 
     companion object {
@@ -60,27 +62,15 @@ class CardDetailsFragment : MvpAppCompatFragment(), CardDetailsView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.CAMERA),
-                    PERMISSION_REQUEST_CODE)
-        }
-
-        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    PERMISSION_REQUEST_CODE)
-        }
-
         val rootView = inflater.inflate(R.layout.fragment_card_details, container, false)
 
         rootView.cardNameEditText.addTextChangedListener(presenter.getCardNameTextWatcher())
         rootView.cardCodeEditText.addTextChangedListener(presenter.getCardCodeTextWatcher())
         rootView.cardNoteEditText.addTextChangedListener(presenter.getCardNoteTextWatcher())
         rootView.addFrontPhotoIcon.setOnClickListener { presenter.onAddPhotoClick(REQUEST_IMAGE_FRONT) }
-        rootView.addFrontPhotoIcon.background.alpha = 200
+        rootView.addFrontPhotoIcon.background.alpha = BACKGROUD_IMAGE_OPACITY
         rootView.addBackPhotoIcon.setOnClickListener { presenter.onAddPhotoClick(REQUEST_IMAGE_BACK) }
-        rootView.addBackPhotoIcon.background.alpha = 200
+        rootView.addBackPhotoIcon.background.alpha = BACKGROUD_IMAGE_OPACITY
         rootView.saveCardButton.setOnClickListener { presenter.onSaveCardButtonClick() }
         rootView.readBarcodeButton.setOnClickListener { presenter.onBarcodeReadButtonClick() }
         rootView.cardFrontPhoto.setOnClickListener { presenter.onFrontPhotoImageViewClick() }
@@ -135,6 +125,20 @@ class CardDetailsFragment : MvpAppCompatFragment(), CardDetailsView {
     }
 
     // CardDetailsView
+
+    override fun checkPermissions() {
+        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.CAMERA),
+                    PERMISSION_REQUEST_CODE)
+        }
+
+        if (ContextCompat.checkSelfPermission(context!!, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+                    PERMISSION_REQUEST_CODE)
+        }
+    }
 
     override fun setName(name: String) {
         cardNameEditText.setText(name)

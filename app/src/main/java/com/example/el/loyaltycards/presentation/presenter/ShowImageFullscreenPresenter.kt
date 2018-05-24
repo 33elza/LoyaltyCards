@@ -1,5 +1,6 @@
 package com.example.el.loyaltycards.presentation.presenter
 
+import android.net.Uri
 import android.os.Handler
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
@@ -19,9 +20,12 @@ class ShowImageFullscreenPresenter : MvpPresenter<ShowImageFullscreenView>() {
     private var mVisible: Boolean = false
     private val mHideRunnable = Runnable { hide() }
 
-    fun onCreate() {
+    private var imageUri: Uri? = null
+
+    fun onCreate(uri: Uri) {
         mVisible = true
-        viewState.loadImage()
+        imageUri = uri
+        viewState.loadImage(imageUri!!)
     }
 
     fun onFullscreenImageViewClick() {

@@ -30,12 +30,12 @@ class BarcodeCaptureActivity : MvpAppCompatActivity(), BarcodeCaptureView {
     override fun onResume() {
         super.onResume()
         sendBarcodeResult()
-        presenter.startCamera(scannerView)
+        scannerView.startCamera()
     }
 
     override fun onPause() {
         super.onPause()
-        presenter.stopCamera(scannerView)
+        scannerView.stopCamera()
     }
 
     fun sendBarcodeResult() {

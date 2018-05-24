@@ -55,6 +55,8 @@ class CardDetailsPresenter : MvpPresenter<CardDetailsView>() {
             EventBus.getDefault().register(this)
         }
 
+        viewState.checkPermissions()
+
         if (id <= 0 && name.isEmpty() && arguments != null && arguments.containsKey(CARD_KEY)) {
             val card = arguments.get(CARD_KEY) as Card
 

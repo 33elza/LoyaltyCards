@@ -27,7 +27,7 @@ class ShowImageFullscreenActivity : MvpAppCompatActivity(), ShowImageFullscreenV
         // Set up the user interaction to manually show or hide the system UI.
         fullscreenImageView.setOnClickListener { presenter.onFullscreenImageViewClick() }
 
-        presenter.onCreate()
+        presenter.onCreate(intent.extras.get(URI) as Uri)
     }
 
     // ShowImageFullscreenView
@@ -36,8 +36,8 @@ class ShowImageFullscreenActivity : MvpAppCompatActivity(), ShowImageFullscreenV
         presenter.onPostCreate()
     }
 
-    override fun loadImage() {
-        Glide.with(this).load(intent.extras.get(URI) as Uri).into(fullscreenImageView)
+    override fun loadImage(imageUri: Uri) {
+        Glide.with(this).load(imageUri).into(fullscreenImageView)
     }
 
     override fun hideActionBar() {
